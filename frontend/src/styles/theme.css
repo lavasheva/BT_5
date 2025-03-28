@@ -1,0 +1,427 @@
+.light {
+    /* Основные стили */
+html {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth; /* Плавная прокрутка */
+  }
+  
+  body {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff5e6; /* Персиковый фон */
+    color: #5a3e36; /* Тёмно-бежевый текст */
+    line-height: 1.6;
+  }
+  
+  h1, h2 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Убираем плывущий шрифт */
+    color: #5a3e36; /* Тёмно-бежевый цвет для заголовков */
+  }
+  
+  /* Стили для заголовка */
+  header {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #ffdab9; /* Светло-персиковый фон */
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  header p {
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin: 0.5rem 0 0;
+    color: #7a5c4d; /* Более светлый оттенок для подзаголовка */
+  }
+  
+  /* Стили для секции с товарами */
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+  
+  section article {
+    width: calc(33.333% - 1.5rem);
+    box-sizing: border-box;
+    padding: 1.5rem;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    border-radius: 10px;
+    background-color: #fffaf0; /* Бежевый фон карточек */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  section article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  section h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+    color: #5a3e36; /* Тёмно-бежевый цвет для заголовков товаров */
+  }
+  
+  section p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #7a5c4d; /* Более светлый оттенок для текста */
+  }
+  
+  section .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #d2691e; /* Оранжево-коричневый для цены */
+  }
+  
+  section .categories {
+    font-size: 0.9rem;
+    color: #a88c7d; /* Светло-коричневый для категорий */
+    margin-top: 1rem;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    section article {
+      width: calc(50% - 1rem);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    section article {
+      width: 100%;
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+    }
+  
+    header p {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Стили для секции чата */
+  #chat {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #fffaf0; /* Бежевый фон, как у карточек товаров */
+    border-radius: 10px;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #chat h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #5a3e36; /* Тёмно-бежевый цвет для заголовка */
+    text-align: center;
+  }
+  
+  /* Контейнер для сообщений */
+  #chatContainer {
+    height: 200px; /* Фиксированная высота */
+    width: 100%; /* Ширина на всю доступную область */
+    overflow-y: auto; /* Вертикальная прокрутка */
+    padding: 1rem;
+    background-color: #fff5e6; /* Персиковый фон */
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Стили для сообщений */
+  #chatContainer p {
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background-color: #ffffff; /* Белый фон для сообщений */
+    border-radius: 10px;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: #5a3e36; /* Тёмно-бежевый текст */
+    font-size: 1rem;
+  }
+  
+  /* Стили для поля ввода и кнопки */
+  #chatInput {
+    width: calc(100% - 100px);
+    padding: 0.5rem;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #5a3e36; /* Тёмно-бежевый текст */
+    background-color: #fff5e6; /* Персиковый фон */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #chatInput::placeholder {
+    color: #a88c7d; /* Светло-коричневый для плейсхолдера */
+  }
+  
+  button {
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffdab9; /* Светло-персиковый фон, как у заголовка */
+    color: #5a3e36; /* Тёмно-бежевый текст */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:hover {
+    background-color: #e0c9b6; /* Светло-бежевый при наведении */
+    transform: translateY(-2px);
+  }
+  
+  button:active {
+    transform: translateY(0);
+  }
+  
+  /* Стили для фильтра */
+  #categoryFilter {
+    padding: 0.5rem;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #5a3e36; /* Тёмно-бежевый текст */
+    background-color: #fff5e6; /* Персиковый фон */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-size: 1rem;
+    color: #5a3e36; /* Тёмно-бежевый текст */
+    margin-right: 0.5rem;
+  }
+}
+/* Темная тема */
+.dark {
+    background-color: #2d2d2d; /* Тёмно-серый фон */
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+  
+  .dark header {
+    background-color: #3d3d3d; /* Тёмный фон заголовка */
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+  
+  .dark h1, .dark h2 {
+    color: #e0c9b6; /* Светло-бежевый цвет для заголовков */
+  }
+  
+  .dark section article {
+    background-color: #3d3d3d; /* Тёмный фон карточек */
+    border-color: #5a3e36; /* Тёмно-бежевая граница */
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+  
+  .dark section .price {
+    color: #d2691e; /* Оранжево-коричневый для цены */
+  }
+  
+  .dark section .categories {
+    color: #a88c7d; /* Светло-коричневый для категорий */
+  }
+  
+  .dark #chat {
+    background-color: #3d3d3d; /* Тёмный фон чата */
+    border-color: #5a3e36; /* Тёмно-бежевая граница */
+  }
+  
+  .dark #chatContainer {
+    background-color: #2d2d2d; /* Тёмный фон контейнера сообщений */
+    border-color: #5a3e36; /* Тёмно-бежевая граница */
+  }
+  
+  .dark #chatContainer p {
+    background-color: #3d3d3d; /* Тёмный фон сообщений */
+    border-color: #5a3e36; /* Тёмно-бежевая граница */
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+  
+  .dark #chatInput {
+    background-color: #2d2d2d; /* Тёмный фон поля ввода */
+    border-color: #5a3e36; /* Тёмно-бежевая граница */
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+  
+  .dark #chatInput::placeholder {
+    color: #a88c7d; /* Светло-коричневый для плейсхолдера */
+  }
+  
+  .dark button {
+    background-color: #5a3e36; /* Тёмно-бежевый фон кнопок */
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+  
+  .dark button:hover {
+    background-color: #7a5c4d; /* Светло-коричневый при наведении */
+  }
+  
+  .dark #categoryFilter {
+    background-color: #2d2d2d; /* Тёмный фон фильтра */
+    border-color: #5a3e36; /* Тёмно-бежевая граница */
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+  
+  .dark label {
+    color: #e0c9b6; /* Светло-бежевый текст */
+  }
+
+  
+  /* Стили для формы авторизации */
+.auth-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fffaf0;
+  border-radius: 10px;
+  border: 1px solid #e0c9b6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+  text-align: center;
+  color: #5a3e36;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.auth-form input {
+  padding: 0.8rem;
+  border: 1px solid #e0c9b6;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff5e6;
+  color: #5a3e36;
+  transition: border-color 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #d2691e;
+  box-shadow: 0 0 0 2px rgba(210, 105, 30, 0.2);
+}
+
+.auth-form button[type="submit"] {
+  padding: 0.8rem;
+  background-color: #ffdab9;
+  color: #5a3e36;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.auth-form button[type="submit"]:hover {
+  background-color: #e0c9b6;
+  transform: translateY(-2px);
+}
+
+.auth-form button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.toggle-auth-btn {
+  background: none;
+  border: none;
+  color: #d2691e;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.toggle-auth-btn:hover {
+  color: #a0522d;
+}
+
+.auth-message {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.auth-message.success {
+  background-color: rgba(144, 238, 144, 0.3);
+  color: #2e8b57;
+}
+
+.auth-message.error {
+  background-color: rgba(255, 182, 193, 0.3);
+  color: #cd5c5c;
+}
+
+/* Темная тема для формы авторизации */
+.dark .auth-container {
+  background-color: #3d3d3d;
+  border-color: #5a3e36;
+}
+
+.dark .auth-container h2 {
+  color: #e0c9b6;
+}
+
+.dark .auth-form input {
+  background-color: #2d2d2d;
+  border-color: #5a3e36;
+  color: #e0c9b6;
+}
+
+.dark .auth-form input:focus {
+  border-color: #d2691e;
+}
+
+.dark .auth-form button[type="submit"] {
+  background-color: #5a3e36;
+  color: #e0c9b6;
+}
+
+.dark .auth-form button[type="submit"]:hover {
+  background-color: #7a5c4d;
+}
+
+.dark .toggle-auth-btn {
+  color: #d2691e;
+}
+
+.dark .toggle-auth-btn:hover {
+  color: #ffa07a;
+}
+
+.dark .auth-message.success {
+  background-color: rgba(46, 139, 87, 0.3);
+}
+
+.dark .auth-message.error {
+  background-color: rgba(205, 92, 92, 0.3);
+}

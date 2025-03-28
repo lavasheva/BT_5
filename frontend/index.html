@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Товары интернет-магазина</title>
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="light">
+      <header>        
+        <h1>Наши товары</h1>
+      </header>
+      <section id="filters">
+        <!-- Фильтр по категориям -->
+        <label for="categoryFilter">Фильтр по категории:</label>
+        <select id="categoryFilter">
+          <option value="Все">Все</option>
+          <option value="Ноутбуки">Ноутбуки</option>
+          <option value="Смартфоны">Смартфоны</option>
+          <option value="Аксессуары">Аксессуары</option>
+          <option value="Гаджеты">Гаджеты</option>
+        </select>
+      </section>
+      
+      <section id="product-list">
+        <!-- Товары будут отображаться здесь -->
+      </section>
+
+      <section id="chat">
+        <h2>Чат поддержки</h2>
+        <div id="chatContainer"></div>
+        <input type="text" id="chatInput" placeholder="Введите сообщение...">
+        <button onclick="sendMessage()">Отправить</button>
+      </section>
+      
+
+
+      <script>
+        // Функция для загрузки товаров через GraphQL
+async function loadProducts() {
+  const query = `
+    {
+      products {
+        name
+        price
+        categories
+      }
+    }`;
+
+  try {
+    const response = await fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+
+    const result = await response.json();
+    const products = result.data.products;
+
+    // Фильтрация товаров по выбранной категории
+    const categoryFilter = document.getElementById('categoryFilter');
+    const selectedCategory = categoryFilter.value;
+
+    const filteredProducts = selectedCategory === "Все"
+      ? products
+      : products.filter(product => product.categories.includes(selectedCategory));
+
+    showProducts(filteredProducts); // Отображаем отфильтрованные товары
+  } catch (error) {
+    console.error('Ошибка при загрузке товаров:', error);
+  }
+}
+
+// Отображение товаров
+function showProducts(products) {
+  const section = document.getElementById('product-list');
+  section.innerHTML = ""; // Очистка списка товаров перед обновлением
+
+  products.forEach(product => {
+    const myArticle = document.createElement('article');
+    const myH2 = document.createElement('h2');
+    const myPrice = document.createElement('p');
+    const myDesc = document.createElement('p');
+    const myCategories = document.createElement('p');
+
+    myH2.textContent = product.name;
+    myPrice.textContent = 'Цена: ' + product.price + ' руб.';
+    myCategories.textContent = 'Категории: ' + product.categories.join(', ');
+
+    myArticle.appendChild(myH2);
+    myArticle.appendChild(myPrice);
+    myArticle.appendChild(myDesc);
+    myArticle.appendChild(myCategories);
+
+    section.appendChild(myArticle);
+  });
+}
+
+// Загрузка товаров при загрузке страницы
+loadProducts();
+
+// Автоматическое обновление списка товаров каждые 5 секунд
+setInterval(async () => {
+  await loadProducts();
+}, 3000); // Обновление каждые 3 секунды
+
+// Обработчик изменения фильтра
+document.getElementById('categoryFilter').addEventListener('change', () => {
+  loadProducts(); // Перезагружаем товары при изменении фильтра
+});
+      </script>
+      <div id="root"></div>
+      <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>

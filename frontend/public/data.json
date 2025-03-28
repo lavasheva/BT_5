@@ -1,0 +1,13 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Ноутбук Lenovo", "price": 50000
+        },
+        {
+            "id": 2,
+            "name": "Смартфон Samsung", "price": 30000
+        }
+    ]
+}
+    

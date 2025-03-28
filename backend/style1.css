@@ -1,0 +1,318 @@
+/* Основные стили */
+html {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth; /* Плавная прокрутка */
+  }
+  
+  body {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff5e6; /* Персиковый фон */
+    color: #5a3e36; /* Тёмно-бежевый текст */
+    line-height: 1.6;
+    padding: 20px 0;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Убираем плывущий шрифт */
+    color: #5a3e36; /* Тёмно-бежевый цвет для заголовков */
+  }
+  
+  /* Стили для заголовка */
+  header {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #ffdab9; /* Светло-персиковый фон */
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  header p {
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin: 0.5rem 0 0;
+    color: #7a5c4d; /* Более светлый оттенок для подзаголовка */
+  }
+  
+  /* Стили для формы добавления товара */
+  #productForm {
+    background-color: #fffaf0; /* Бежевый фон */
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  #productForm input,
+  #productForm textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e0c9b6;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #5a3e36;
+    background-color: #fff5e6;
+  }
+  
+  #productForm textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  #productForm button {
+    background-color: #d2691e; /* Оранжево-коричневый */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #productForm button:hover {
+    background-color: #b3591b; /* Темнее при наведении */
+  }
+  
+  /* Стили для списка товаров */
+  #productList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+  
+  #productList div {
+    width: calc(33.333% - 1.5rem);
+    box-sizing: border-box;
+    padding: 1.5rem;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    border-radius: 10px;
+    background-color: #fffaf0; /* Бежевый фон карточек */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #productList div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  #productList h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+    color: #5a3e36; /* Тёмно-бежевый цвет для заголовков товаров */
+  }
+  
+  #productList p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #7a5c4d; /* Более светлый оттенок для текста */
+  }
+  
+  #productList .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #d2691e; /* Оранжево-коричневый для цены */
+  }
+  
+  #productList .categories {
+    font-size: 0.9rem;
+    color: #a88c7d; /* Светло-коричневый для категорий */
+    margin-top: 1rem;
+  }
+  
+  /* Стили для кнопок редактирования и удаления */
+  #productList button {
+    background-color: #d2691e; /* Оранжево-коричневый */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin: 0.25rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  #productList button:hover {
+    background-color: #b3591b; /* Темнее при наведении */
+  }
+  
+  /* Стили для формы редактирования */
+  #editForm {
+    background-color: #fffaf0; /* Бежевый фон */
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    display: none; /* Скрыта по умолчанию */
+  }
+  
+  #editForm input,
+  #editForm textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e0c9b6;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #5a3e36;
+    background-color: #fff5e6;
+  }
+  
+  #editForm textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  #editForm button {
+    background-color: #d2691e; /* Оранжево-коричневый */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  #editForm button:hover {
+    background-color: #b3591b; /* Темнее при наведении */
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    #productList div {
+      width: calc(50% - 1rem);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #productList div {
+      width: 100%;
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+    }
+  
+    header p {
+      font-size: 1rem;
+    }
+  }
+
+
+  /* Стили для секции чата */
+#chat {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fffaf0; /* Бежевый фон, как у карточек товаров */
+  border-radius: 10px;
+  border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#chat h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #5a3e36; /* Тёмно-бежевый цвет для заголовка */
+  text-align: center;
+}
+
+/* Контейнер для сообщений */
+#chatContainer {
+  height: 200px; /* Фиксированная высота */
+  width: 95%; /* Ширина на всю доступную область */
+  overflow-y: auto; /* Вертикальная прокрутка */
+  padding: 1rem;
+  background-color: #fff5e6; /* Персиковый фон */
+  border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для сообщений */
+#chatContainer p {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  background-color: #ffffff; /* Белый фон для сообщений */
+  border-radius: 10px;
+  border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: #5a3e36; /* Тёмно-бежевый текст */
+  font-size: 1rem;
+}
+
+/* Стили для поля ввода и кнопки */
+#chatInput {
+  width: 96.5%;
+  padding: 0.5rem;
+  border: 1px solid #e0c9b6; /* Светло-бежевая граница */
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #5a3e36; /* Тёмно-бежевый текст */
+  background-color: #fff5e6; /* Персиковый фон */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#chatInput::placeholder {
+  color: #a88c7d; /* Светло-коричневый для плейсхолдера */
+}
+
+#chat button {
+  margin-top: 10px;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #d2691e; /* Оранжево-коричневый */
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #b3591b; /* Темнее при наведении */
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Стилизация полосы прокрутки */
+#chatContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+#chatContainer::-webkit-scrollbar-track {
+  background: #fff5e6;
+  border-radius: 10px;
+}
+
+#chatContainer::-webkit-scrollbar-thumb {
+  background: #e0c9b6;
+  border-radius: 10px;
+}
+
+#chatContainer::-webkit-scrollbar-thumb:hover {
+  background: #d2691e;
+}

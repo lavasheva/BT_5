@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Добавить новый товар</h2>
+        <form id="productForm">
+            <input type="text" id="name" placeholder="Название" required><br>
+            <input type="number" id="price" placeholder="Цена" required><br>
+            <textarea id="description" placeholder="Описание"></textarea><br>
+            <input type="text" id="categories" placeholder="Категории (через запятую)"><br>
+            <button type="submit">Добавить</button>
+        </form>
+
+        <h2>Список товаров</h2>
+        <div id="productList"></div>
+
+        <!-- Форма для редактирования -->
+        <div class="edit-form" id="editForm">
+            <h2>Редактировать товар</h2>
+            <form id="editProductForm">
+                <input type="text" id="editName" placeholder="Название" required><br>
+                <input type="number" id="editPrice" placeholder="Цена" required><br>
+                <textarea id="editDescription" placeholder="Описание"></textarea><br>
+                <input type="text" id="editCategories" placeholder="Категории (через запятую)"><br>
+                <button type="submit">Сохранить изменения</button>
+                <button type="button" onclick="cancelEdit()">Отмена</button>
+            </form>
+        </div>
+    </div>
+
+    <section id="chat">
+        <h2>Чат поддержки</h2>
+        <div id="chatContainer"></div>
+        <input type="text" id="chatInput" placeholder="Введите сообщение...">
+        <button onclick="sendMessage()">Отправить</button>
+    </section>    
+
+
+    <script>
+        const API_URL = "http://localhost:3000/products";
+
+        // Загрузка списка товаров при открытии страницы
+        window.onload = fetchProducts;
+
+        // Добавление товара
+        document.getElementById("productForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+            const price = document.getElementById("price").value;
+            const description = document.getElementById("description").value;
+            const categories = document.getElementById("categories").value.split(",").map(cat => cat.trim());
+
+            fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, price, description, categories })
+            })
+            .then(() => {
+                alert("Товар добавлен!");
+                this.reset();
+                fetchProducts(); // Обновление списка товаров
+            })
+            .catch(error => console.error("Ошибка при добавлении товара:", error));
+        });
+
+        // Получение списка товаров
+        function fetchProducts() {
+            fetch(API_URL)
+                .then(response => response.json())
+                .then(data => {
+                    const productList = document.getElementById("productList");
+                    productList.innerHTML = ""; // Очистка списка
+                    data.forEach(product => {
+                        const item = document.createElement("div");
+                        item.innerHTML = `
+                            <strong>${product.name}</strong> - ${product.price} руб.
+                            <p>${product.description}</p>
+                            <p>Категории: ${product.categories.join(", ")}</p>
+                            <button onclick="editProduct(${product.id})">Редактировать</button>
+                            <button onclick="deleteProduct(${product.id})">Удалить</button>
+                        `;
+                        productList.appendChild(item);
+                    });
+                })
+                .catch(error => console.error("Ошибка при получении товаров:", error));
+        }
+
+        // Удаление товара
+        function deleteProduct(id) {
+            if (confirm("Вы уверены, что хотите удалить этот товар?")) {
+                fetch(`${API_URL}/${id}`, {
+                    method: "DELETE"
+                })
+                .then(() => {
+                    alert("Товар удален!");
+                    fetchProducts(); // Обновление списка товаров
+                })
+                .catch(error => console.error("Ошибка при удалении товара:", error));
+            }
+        }
+
+        // Редактирование товара
+        let editingProductId = null;
+
+        function editProduct(id) {
+            editingProductId = id;
+            fetch(`${API_URL}/${id}`)
+                .then(response => response.json())
+                .then(product => {
+                    document.getElementById("editName").value = product.name;
+                    document.getElementById("editPrice").value = product.price;
+                    document.getElementById("editDescription").value = product.description;
+                    document.getElementById("editCategories").value = product.categories.join(", ");
+                    document.getElementById("editForm").style.display = "block"; // Показ формы редактирования
+                })
+                .catch(error => console.error("Ошибка при получении товара:", error));
+        }
+
+        // Отмена редактирования
+        function cancelEdit() {
+            document.getElementById("editForm").style.display = "none";
+            editingProductId = null;
+        }
+
+        // Сохранение изменений
+        document.getElementById("editProductForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("editName").value;
+            const price = document.getElementById("editPrice").value;
+            const description = document.getElementById("editDescription").value;
+            const categories = document.getElementById("editCategories").value.split(",").map(cat => cat.trim());
+
+            fetch(`${API_URL}/${editingProductId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, price, description, categories })
+            })
+            .then(() => {
+                alert("Товар обновлен!");
+                cancelEdit(); // Скрытие формы редактирования
+                fetchProducts(); // Обновление списка товаров
+            })
+            .catch(error => console.error("Ошибка при обновлении товара:", error));
+        });
+
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onopen = () => {
+            console.log('Админ подключен к WebSocket серверу');
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data); // Преобразуем JSON-строку в объект
+                displayMessage(data.text); // Отображаем только текст сообщения
+            } catch (error) {
+                console.error('Ошибка обработки сообщения:', error);
+            }
+        };
+
+
+        socket.onclose = () => {
+            console.log('WebSocket соединение закрыто');
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (message) {
+                socket.send(JSON.stringify({ text: message })); // Теперь отправляем JSON
+                input.value = '';
+            }
+        }
+
+
+        function displayMessage(message) {
+    const chatContainer = document.getElementById('chatContainer');
+    const messageElement = document.createElement('p');
+
+    try {
+        const data = JSON.parse(message); // Преобразуем JSON в объект
+        messageElement.textContent = data.text; // Отображаем только текст
+    } catch (error) {
+        messageElement.textContent = message; // Если не JSON, просто показываем как есть
+    }
+
+    chatContainer.appendChild(messageElement); // Добавляем сообщение в контейнер
+}
+
+    </script>
+</body>
+</html>

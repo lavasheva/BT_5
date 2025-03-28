@@ -1,0 +1,30 @@
+# Игнорируем все node_modules
+node_modules/
+
+# Файлы зависимостей (можно оставить один из lock-файлов)
+package-lock.json
+
+# Файлы окружения
+.env
+
+# Автогенерируемые/конфигурационные файлы
+openapi.yaml
+
+# Бэкапы и временные файлы
+*.bak
+*.tmp
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# IDE/Editor файлы
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Для фронтенда (если используете сборку)
+/dist/
+/build/
+.cache/
